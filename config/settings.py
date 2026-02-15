@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'pets',
     'vaccines',
     'vaccinations',
+    "drf_spectacular",
 
 ]
 
@@ -130,4 +131,25 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
     ),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Pet Vaccination API",
+    "DESCRIPTION": "API REST para gerenciamento de pets, vacinas e registros de vacinação.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_SETTINGS": {"persistAuthorization": True},
+    "COMPONENT_SPLIT_REQUEST": True,
+
+    "SECURITY": [{"bearerAuth": []}],
+    "COMPONENTS": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+            }
+        }
+    },
 }
